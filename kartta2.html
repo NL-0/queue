@@ -14,7 +14,7 @@
         var map;
         var paikat;
 
-        function init() {
+        function kartta() {
 
             paikat = $.ajax({
                 url: "hel4.geojson",
@@ -72,7 +72,7 @@
         }
 
     </script>
-    <script>init();</script>
+    <script>kartta();</script>
     <br>
     <input id="location" type="button" value="Sijainti" onClick="javascript:getLocationLeaflet();">
 </body>
