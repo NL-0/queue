@@ -11,3 +11,8 @@ body {
     width:500px; 
     height:500px;
 }
+#location {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
