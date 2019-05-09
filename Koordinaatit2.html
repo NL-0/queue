@@ -1,0 +1,53 @@
+<!-- Osoitteesta: https://forum.openstreetmap.org/viewtopic.php?id=57038 -->
+
+<!DOCTYPE html>
+
+<html>
+
+<head>
+  <title>Pointer</title>
+  <meta charset='utf-8' />
+  <meta name="viewport" content="width=device-width, height=device-height, user-scalable=no"> 
+  <link rel="stylesheet" href="https://npmcdn.com/leaflet@1.0.0-rc.2/dist/leaflet.css" />
+  <script src="https://npmcdn.com/leaflet@1.0.0-rc.2/dist/leaflet.js"></script>
+</head>
+
+<style>
+
+#mapDiv {
+	position: absolute;
+	z-index:1;
+	top:0; 
+	bottom:0; 
+	right:0; 
+	left:0; 
+	overflow:hidden; 
+	background-color:grey;
+	}
+
+</style>
+
+<body>
+	<div  id="mapDiv" ></div>
+</body>
+
+<script>
+
+function onMapClick(e) {
+    var lat  = e.latlng.lat.toFixed(5);
+    var lon  = e.latlng.lng.toFixed(5);
+
+    alert("lat: " + lat.toString() + ", " + "lng: " + lon.toString());
+}
+
+var osmUrl='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
+var osm = new L.TileLayer(osmUrl, {minZoom:2, maxZoom:19});		
+var map = new L.Map('mapDiv', { doubleClickZoom:false, zoomControl:false, maxBounds:([[90,-270],[-90,270]]) });
+
+map.addLayer(osm);
+map.fitBounds([[0,-180],[0,180]]);
+map.on('click', onMapClick);
+
+</script>
+
+</html>
