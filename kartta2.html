@@ -14,10 +14,11 @@
         var map;
         var paikat;
 
-        function kartta() {
+        function init() {
 
             paikat = $.ajax({
-                url: "hel4.geojson",
+                //url: "hel4.geojson",
+                url: "https://gist.githubusercontent.com/NL-0/b6f17f8f86598eab84087db42c78f83a/raw/9699816ee7b9336e383d24082c40456bceaf6ff9/hel4.geojson",
                 dataType: "json",
                 success: console.log("Ladattu onnistuneesti.. kaiketi."),
                 error: function (xhr) {
@@ -26,16 +27,25 @@
             })
 
             $.when(paikat).done(function () {
-
                 map = L.map('map')
                     .setView([65.457507, 22.232935], 4);
                 var osmUrl = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
                 var osm = new L.TileLayer(osmUrl, {
-                    minZoom: 2, maxZoom: 19
+                    minZoom: 2,
+                    maxZoom: 19
                 }).addTo(map);
+
                 var datalayer = L.geoJson(paikat.responseJSON, {
                     onEachFeature: function (feature, featureLayer) {
-                        featureLayer.bindPopup(feature.properties.NIMI + "<br>" + "<br>" + feature.properties.URL);
+
+                        var scr = feature.properties.FID;
+
+                        var location = "main.html?myVar1=" + feature.properties.FID;
+                        //var loc = document.write('<a href="' + location + '">link here</a> <br>');
+
+
+                        featureLayer.bindPopup(feature.properties.NIMI + "<br>" + "<br>" + feature.properties.URL + "<br>" + '<a href=' + location + '>avc</a>');
+
                     }
                 }).addTo(map);
 
@@ -52,7 +62,6 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="https://unpkg.com/leaflet@1.0.3/dist/leaflet.js"></script>
     <script>
-
         function onLocationFound(e) {
             //var radius = e.accuracy / 2;
             var location = e.latlng
@@ -68,11 +77,15 @@
             map.on('locationfound', onLocationFound);
             map.on('locationerror', onLocationError);
 
-            map.locate({ setView: true, maxZoom: 16 });
+            map.locate({
+                setView: true,
+                maxZoom: 16
+            });
         }
-
     </script>
-    <script>kartta();</script>
+    <script>
+        init();
+    </script>
     <br>
     <input id="location" type="button" value="Sijainti" onClick="javascript:getLocationLeaflet();">
 </body>
