@@ -24,47 +24,124 @@
         <div id="teksti2">Seuraava numero</div><br><br>
         <div id="numero1"></div>
         <div id="numero2"></div>
-        <br><br><br><br><br>
+        <br><br>
+        <div id="arvio">Arvio odotusaika<br></div>
+        <div id="arvio2">min</div>
+        <br><br><br><br>
         <div id="teksti2">Oma Numero</div><br><br>
-        <div id="seuraava">
-        </div>
+        <div id="seuraava"></div>
         <br><br>
         <button id="omanumero" onclick="jokufunction()">Ota Numero</button><br>
+        <br>
+        <button id="peruuta" onclick="peruutafunction()">Peruuta numero</button><br>
+
     </div>
     <script>
         var jono2 = Math.floor(Math.random() * 10);
         var seuraava = jono2;
-        var oma = 0
+        var oma = 0;
+        var time1;
+        var time2;
+        var jono3
 
         window.setInterval(function () {
-            jono2++;
-            document.getElementById("numero1").innerHTML = jono2;
+
+            if (oma != "0") {
+                jono3 = oma - seuraava
+                document.getElementById("numero1").innerHTML = jono3;
+                jono2++
+                time1 = Math.floor(Date.now() / 1000)
+            } else {
+                jono2++
+                time1 = Math.floor(Date.now() / 1000)
+                document.getElementById("numero1").innerHTML = jono2;
+            }
+
         }, 1000);
 
         window.setInterval(function () {
             seuraava++;
             document.getElementById("numero2").innerHTML = seuraava;
+            time2 = Math.floor(Date.now() / 1000)
         }, 2000);
-
-
 
         function jokufunction() {
             oma = seuraava + jono2;
             document.getElementById("seuraava").innerHTML = oma;
+            openForm()
+
+        }
+
+        function peruutafunction() {
+            document.getElementById("seuraava").innerHTML = "";
+            oma = 0;
 
         }
 
         window.setInterval(function () {
+
+            if (jono3 < 0) {
+                document.getElementById("arvio").innerHTML = "0";
+
+            }
+            else {
+            var aika3 = jono3 * 5
+            var aika4 = fancyTimeFormat(aika3)
+            document.getElementById("arvio").innerHTML = aika4;
+            }  
+        }, 2000);
+
+        function fancyTimeFormat(time)
+        {
+            // Hours, minutes and seconds
+            var hrs = ~~(time / 3600);
+            var mins = ~~((time % 3600) / 60);
+            var secs = ~~time % 60;
+
+            // Output like "1:01" or "4:03:59" or "123:03:59"
+                        var ret = "";
+
+            if (hrs > 0) {
+                ret += "" + hrs + ":" + (mins < 10 ? "0" : "" ); } ret +="" + mins + ":" + (secs < 10 ? "0" : "" ); ret +="" + secs;
+             return ret; }
+
+        window.setInterval(function () {
             if (oma == seuraava) {
-                alert("meh");
+                //alert("meh");
+                var notification = new Notification("Vuoronumero");
             }
 
         }, 100);
     </script>
+
+
+    <div class="form-popup" id="myForm">
+        <form action="/action_page.php" class="form-container">
+          <h1>Login</h1>
+      
+          <label for="email"><b>Email</b></label>
+          <input type="text" placeholder="Email" name="email" required>
+      
+          <label for="psw"><b>SMS</b></label>
+          <input type="password" placeholder="Anna puhelinnumero" name="psw" required>
+      
+          <button type="submit" class="btn">Login</button>
+          <button type="submit" class="btn cancel" onclick="closeForm()">Close</button>
+        </form>
+      </div>
     <br>
 
 
+        <script>
+            function openForm() {
+                document.getElementById("myForm").style.display = "block";
+            }
 
+            function closeForm() {
+                document.getElementById("myForm").style.display = "none";
+            }
+
+</script>
 
 </body>
 
