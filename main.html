@@ -3,8 +3,7 @@
 
 <head>
     <meta charset="utf-8" />
-
-
+    <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 
 
@@ -13,9 +12,60 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 
     <script>
-        var myParam = location.search.split('myVar1=')[1]
-        document.write(myParam)
+        //  var myParam = location.search.split('myVar1=')[1]
+        //  document.write(myParam)
     </script>
+
+    <br>
+    <br>
+    <div id="outer">
+        <br>
+        <div id="teksti1">Montako jonossa</div>
+        <div id="teksti2">Seuraava numero</div><br><br>
+        <div id="numero1"></div>
+        <div id="numero2"></div>
+        <br><br><br><br><br>
+        <div id="teksti2">Oma Numero</div><br><br>
+        <div id="seuraava">
+        </div>
+        <br><br>
+        <button id="omanumero" onclick="jokufunction()">Ota Numero</button><br>
+    </div>
+    <script>
+        var jono2 = Math.floor(Math.random() * 10);
+        var seuraava = jono2;
+        var oma = 0
+
+        window.setInterval(function () {
+            jono2++;
+            document.getElementById("numero1").innerHTML = jono2;
+        }, 1000);
+
+        window.setInterval(function () {
+            seuraava++;
+            document.getElementById("numero2").innerHTML = seuraava;
+        }, 2000);
+
+
+
+        function jokufunction() {
+            oma = seuraava + jono2;
+            document.getElementById("seuraava").innerHTML = oma;
+
+        }
+
+        window.setInterval(function () {
+            if (oma == seuraava) {
+                alert("meh");
+            }
+
+        }, 100);
+    </script>
+    <br>
+
+
+
+
 </body>
 
 </html>

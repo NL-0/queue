@@ -1,23 +1,93 @@
 body {
-    margin: 0;
-    padding: 0;
+    max-width: 500px;
+    margin: auto;
+    padding: 10px;
 }
+
 #map {
     display: block;
     margin-left: auto;
     margin-right: auto;
     top: 0;
     bottom: 0;
-    width:500px; 
-    height:500px;
+    width: 500px;
+    height: 500px;
 }
+
 #location {
     display: block;
     margin-left: auto;
     margin-right: auto;
 }
+
 #etsi {
     display: block;
     margin-left: auto;
     margin-right: auto;
 }
+
+#outer {
+    text-align: center;
+    border-style: solid;
+
+}
+
+#numero1 {
+    display: table;
+    display: table-row;
+    border-style: solid;
+    width: 50px;
+    height: 20px;
+    display: table-cell;
+    text-align: center;
+    display: inline-block;
+    margin-right: 150px;
+    color: blue;
+}
+
+#numero2 {
+    display: table;
+    display: table-row;
+    border-style: solid;
+    width: 50px;
+    height: 20px;
+    display: table-cell;
+    text-align: center;
+    display: inline-block;
+    color: green;
+}
+
+#teksti1 {
+    display: table;
+    display: table-row;
+    display: table-cell;
+    text-align: center;
+    display: inline-block;
+    margin-right: 50px;
+}
+
+#teksti2 {
+    display: table;
+    display: table-row;
+    display: table-cell;
+    text-align: center;
+    display: inline-block;
+}
+
+#seuraava {
+    border-style: solid;
+    width: 50px;
+    height: 20px;
+    display: table-cell;
+    text-align: center;
+    display: inline-block;
+    color: red;
+}
+
+#omanumero {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#koko {}
