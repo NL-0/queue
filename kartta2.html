@@ -51,8 +51,18 @@
 
                 map.fitBounds(datalayer.getBounds());
             });
+
+
+            $(function () {
+                $("#etsi").load("4-ajax-search.html");
+            });
         }
     </script>
+
+        <script>
+         
+        </script>
+
 
 
 </head>
@@ -88,6 +98,7 @@
     </script>
     <br>
     <input id="location" type="button" value="Sijainti" onClick="javascript:getLocationLeaflet();">
+    <div id="etsi"></div>
 </body>
 
 </html>
