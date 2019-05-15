@@ -3,8 +3,8 @@
     <form id="register-form" action="" method="post" role="form">
         <div class="input-row">
             <span id="first-name-info"></span> <input type="text"
-                name="Etunimi" id="first-name" class="input-field"
-                placeholder="Etunimi value="">
+                name= "Etunimi" id="first-name" class="input-field"
+                placeholder="Etunimi" value="">
         </div>
         <div class="input-row">
             <span id="last-name-info"></span> <input type="text"
