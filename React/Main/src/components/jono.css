@@ -1,0 +1,83 @@
+.outer {
+    text-align: center;
+    max-width: 500px;
+    margin: auto;
+    padding: 10px;
+
+}
+.teksti1 {
+    text-align: center;
+    display: inline-block;
+    margin-right: 50px;
+}
+
+.teksti2 {
+    text-align: center;
+    display: inline-block;
+}
+
+.numero1 {
+    border-style: solid;
+    width: 50px;
+    height: 20px;
+    text-align: center;
+    display: inline-block;
+    margin-right: 150px;
+    color: blue;
+}
+
+.numero2 {
+    border-style: solid;
+    width: 50px;
+    height: 20px;
+    text-align: center;
+    display: inline-block;
+    color: green;
+}
+
+.seuraava {
+    border-style: solid;
+    width: 50px;
+    height: 20px;
+    display: table-cell;
+    text-align: center;
+    display: inline-block;
+    color: red;
+}
+
+.omanumero {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.peruuta {
+    color: red;
+    margin-left: auto;
+    margin-right: auto;
+    font-size: 30px;
+}
+
+.arvio {
+    position: relative;
+    left: 105px;
+    color: purple;
+    font-size: 13px;
+    text-align: center;
+    display: inline-block;
+}
+
+.arvio2 {
+    position: relative;
+    left: 105px;
+    color: purple;
+    font-size: 13px;
+    text-align: center;
+    display: inline-block;
+    padding: 3px;
+}
+
+.login {
+    margin-left: auto;
+    margin-right: auto;
+    font-size: 20px;
+}
