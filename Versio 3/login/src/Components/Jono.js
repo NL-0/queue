@@ -6,6 +6,11 @@ import axios from 'axios';
 import toaster from 'toasted-notes';
 import 'toasted-notes/src/styles.css'; // optional styles
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { Button } from 'react-bootstrap';
+import { faPlusSquare, faMinusSquare } from '@fortawesome/free-solid-svg-icons';
+import { library } from '@fortawesome/fontawesome-svg-core';
+
+library.add(faPlusSquare, faMinusSquare)
 
 class Jono extends Component {
   constructor(props) {
@@ -32,6 +37,12 @@ class Jono extends Component {
       url: '',
       url1: 'http://192.168.220.139:9595/components/api/server/id/1',
       url2: 'http://192.168.220.139:9595/components/api/server/id/2',
+      timer10: '1',
+      timer11: '1',
+      timer12: '1',
+      timer13: '1',
+      timer20: [5],
+      timer21: '',
     };
 
   }
@@ -49,6 +60,7 @@ class Jono extends Component {
         this.setState({
           jono: jotain.jono,
           seuraava: jotain.seuraava,
+          hostname: jotain.hostname,
         })
       })
     }
@@ -79,16 +91,15 @@ class Jono extends Component {
   tick = () => {
     this.axiosTest()
 
-    
     if (this.state.oma === '0') {
       this.setState({
          tmp: parseInt(this.state.num1) + parseInt(this.state.num2),
-         arvioAika: (parseInt(this.state.tmp) - parseInt(this.state.num2)) * 5
+         arvioAika: (parseInt(this.state.tmp) - parseInt(this.state.num2)) * this.state.timer21
       })
     }
     else {
       this.setState({
-        arvioAika: (Number(this.state.oma) - Number(this.state.num2)) * 5
+        arvioAika: (Number(this.state.oma) - Number(this.state.num2)) * this.state.timer21
       })
     }
 
@@ -103,14 +114,38 @@ class Jono extends Component {
       //alert("Vuoronumero")
     }
 
+    if (this.state.jono !== this.state.timer10) {
+      this.setState({
+        timer12: Date.now(),
+        timer13: Math.floor(((this.state.timer11 - this.state.timer12)/1000) % 60),
+      })
+
+      this.setState(prevState => ({
+        timer20: [...prevState.timer20, this.state.timer13]
+     }))
+    // console.log(this.state.timer20)
+    }
+
     this.setState({
       num1: this.state.jono, 
       num2: this.state.seuraava,
       tmp2: Number(this.state.jono) + 1,
       tmp3: Number(this.state.seuraava),
+      timer10: this.state.jono,
+      timer11: Date.now(),
+      timer21: this.keskiarvo(),
     })
+
+
+
 };
 
+
+keskiarvo() {
+  let sum = this.state.timer20.reduce((previous, current) => current += previous);
+  let avg = sum / this.state.timer20.length;
+  return avg
+}
 
 axiosTest2() {
   axios.put(`${this.state.url}`, { 
@@ -163,17 +198,18 @@ axiosTest2() {
      return (
       <div className="outer">
         <br />
-         <div className="container">
+         <div className="container">{this.state.hostname}
+         <br /><br />
           <div className="row" align="center">
             <div className="col-6">
-            <button type="button" className="btn btn-primary">
+            <Button type="button" className="btn btn-primary">
             Jonon pituus: <span className="badge badge-light">{this.state.num1}</span>
-              </button>
+              </Button>
             </div>
             <div className="col-6">
-            <button type="button" className="btn btn-success">
+            <Button type="button" className="btn btn-success">
             Jonon pituus: <span className="badge badge-light">{this.state.num2}</span>
-              </button>
+              </Button>
             </div>
           </div>
           <div className="row">
@@ -185,20 +221,27 @@ axiosTest2() {
           <br />
           <br />
           <div align="center">
-            <button type="button" className="btn btn-success">
+            <Button type="button" className="btn btn-success">
               Oma numero: <span className="badge badge-light">{this.state.oma}
               </span>
-            </button>
+            </Button>
           </div>
           <br />
           <br />
           <div align="center">
-            <button type="button" className="btn btn-success" onClick={this.otanumero}>
-              Ota Numero <span className="badge badge-light">  
+            <Button type="button" className="btn btn-success" onClick={this.otanumero}>
+              Ota Numero &nbsp; <span className="badge badge-primary">  
               </span>
-            </button>
+              <FontAwesomeIcon icon={faPlusSquare} />
+            </Button>
           </div>
-
+          <br />
+          <div align="center">
+          <Button type="button" className="btn btn-warning" style={peruutaStyle} onClick={this.peruutaNumero}>
+          Peruuta numero &nbsp;
+          <FontAwesomeIcon icon={faMinusSquare} />
+          </Button>
+          </div>
         </div>
 
 
@@ -210,11 +253,11 @@ axiosTest2() {
 
               
             {/* <button className="omanumero" style={omaStyle} onClick={this.otanumero}>Ota Numero</button> */}
+            {/* <br />
             <br />
-            <br />
-            <button className="peruuta" style={peruutaStyle} onClick={this.peruutaNumero}>Peruuta numero</button>
+            <button className="peruuta" style={peruutaStyle} onClick={this.peruutaNumero}>Peruuta numero</button> */}
               
-            
+            <br />
 
 
        </div>
