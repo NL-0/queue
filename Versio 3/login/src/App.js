@@ -50,7 +50,7 @@ class App extends Component {
               <React.Fragment>
               <Button bsStyle="primary" className="btn-margin" onClick={this.goTo.bind(this, 'home')}
                 >Kartta &nbsp;
-<FontAwesomeIcon icon={faMapMarkedAlt} />
+                <FontAwesomeIcon icon={faMapMarkedAlt} />
               </Button>
 
               <Button bsStyle="primary" className="btn-margin" onClick={this.goTo.bind(this, 'jono2')}>

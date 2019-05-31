@@ -13,6 +13,7 @@ class Home extends Component {
           isAuthenticated() && (
               
               <Jono />
+          
             )
         }
         {

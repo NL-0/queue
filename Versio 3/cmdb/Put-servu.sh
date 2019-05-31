@@ -8,7 +8,9 @@ declare -i seuraava=$((1 + RANDOM % 10))
 while true
 do 
 
-curl -X PUT -d '{"id" : 1, "hostname" : "jokuhosti", "enabled" : "1", "created" : "data", "jono" : '$jono', "seuraava" : '$seuraava'}' http://localhost:9595/components/api/server/id/1
+# curl -X PUT -d '{"id" : 1, "hostname" : "jokuhosti", "enabled" : "1", "created" : "data", "jono" : '$jono', "seuraava" : '$seuraava'}' http://localhost:9595/components/api/server/id/1
+
+curl -X PUT -d '{"id" : 1, "hostname : "jokuhosti", "jono" : '123'}' http://localhost:9595/components/api/server/id/1
 
 
 jono=$(($jono + RANDOM % 2))
@@ -17,5 +19,5 @@ echo $jono
 echo $seuraava
 
     #echo "Hi"
-    sleep 5
+    sleep 100
 done

@@ -3,7 +3,6 @@ import React, { Component } from 'react'
 import './jono.css';
 import Arvio from './Arvio';
 import axios from 'axios';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 class Jono2 extends Component {
   constructor(props) {
@@ -24,6 +23,12 @@ class Jono2 extends Component {
       jono: '1',
       seuraava: '1', 
       tmp: '1',
+      timer10: '1',
+      timer11: '1',
+      timer12: '1',
+      timer13: '1',
+      timer20: [5],
+      timer21: '',
     };
 
   }
@@ -61,12 +66,12 @@ class Jono2 extends Component {
     if (this.state.oma === '0') {
       this.setState({
          tmp: parseInt(this.state.num1) + parseInt(this.state.num2),
-         arvioAika: (parseInt(this.state.tmp) - parseInt(this.state.num2)) * 5
+        arvioAika: (parseInt(this.state.tmp) - parseInt(this.state.num2)) * this.state.timer21
       })
     }
     else {
       this.setState({
-        arvioAika: (Number(this.state.oma) - Number(this.state.num2)) * 5
+        arvioAika: (Number(this.state.oma) - Number(this.state.num2)) * this.state.timer21
       })
     }
 
@@ -75,12 +80,34 @@ class Jono2 extends Component {
       console.log(this.state.num2)
       alert("Vuoronumero")
     }
+    
+    if (this.state.jono !== this.state.timer10) {
+      this.setState({
+        timer12: Date.now(),
+        timer13: Math.floor(((this.state.timer11 - this.state.timer12)/1000) % 60),
+      })
+
+      this.setState(prevState => ({
+        timer20: [...prevState.timer20, this.state.timer13]
+     }))
+     console.log(this.state.timer20)
+    }
 
     this.setState({
       num1: this.state.jono, 
       num2: this.state.seuraava,
+      timer10: this.state.jono,
+      timer11: Date.now(),
+      timer21: this.keskiarvo(),
     })
+    console.log("Timer21: " +this.state.timer21)
 };
+
+  keskiarvo() {
+    let sum = this.state.timer20.reduce((previous, current) => current += previous);
+    let avg = sum / this.state.timer20.length;
+    return avg
+  }
 
   aikaArvio() {
     return  <Arvio time={this.state.arvioAika} />
@@ -100,7 +127,7 @@ class Jono2 extends Component {
             </div>
             <div className="col-6">
             <button type="button" className="btn btn-success">
-            Jonon pituus: <span className="badge badge-light">{this.state.num2}</span>
+            Seuraava: <span className="badge badge-light">{this.state.num2}</span>
               </button>
             </div>
           </div>
@@ -112,8 +139,6 @@ class Jono2 extends Component {
           </div>
           <br />
           <div>
-          
-
           </div>
         </div>
       </div>
