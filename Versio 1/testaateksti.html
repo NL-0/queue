@@ -1,0 +1,51 @@
+<html>
+
+<head>
+<script language="JavaScript">
+    function validateEmail()
+    {
+        var email=document.getElementById('email1').value;
+        var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        var ok=re.test(email);
+        if(ok==true) alert("OK email-address: " + email);
+            else alert("bad email-address: " + email);
+    }
+
+    /* Sallitut numerot:
+        (123) 456-7890
+        (123)456-7890
+        123-456-7890
+        123.456.7890
+        1234567890
+        +31636363634
+        075-63546725 
+    */
+    function validateSMS()
+    {
+        var sms=document.getElementById('sms1').value;
+        var re = /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im;
+        var ok=re.test(sms);
+        if(ok==true) alert("OK SMS-numero: " + sms);
+            else alert("ei kelpaava SMS-numero: " + sms);
+    }
+</script>
+</head>
+
+<body>
+    SMS & Email testi<br>
+
+    <button onclick="validateEmail()"> Testaa Email-osoite </button>
+    <button onclick="validateSMS()"> Testaa SMS-numero </button>
+
+    <form>
+    <p>Syötä email-osoite:</p>
+    <input id='email1'>
+    </form>
+
+    <form>
+    <p>Syötä SMS-numero:</p>
+    <input id='sms1'>
+    </form>
+</body>
+
+</html>

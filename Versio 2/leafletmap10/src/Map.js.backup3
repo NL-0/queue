@@ -1,0 +1,116 @@
+//Tuntemattomasta syystä täpit eivät tulostu
+
+import React from 'react';
+import { Map as LeafletMap, Marker, Popup, TileLayer } from 'react-leaflet';
+import {GeoJSON} from 'react-leaflet';
+import axios from 'axios';
+//yarn add axios
+
+class Map extends React.Component
+{
+  constructor()
+  {
+    super();
+    this.state = {
+
+      lat: 37.81893781173967,
+      lng: -122.47867584228514,
+      zoom: 13,
+      open: false,
+
+      omadata: []
+    };
+  }
+
+  //https://daveceddia.com/ajax-requests-in-react
+  //https://coursework.vschool.io/class-based-components-and-axios-in-react
+  //https://www.robinwieruch.de/react-state-array-add-update-remove
+  componentDidMount2()
+  {
+    //alert("cdm");
+
+    axios.get('https://gist.githubusercontent.com/NL-0/b6f17f8f86598eab84087db42c78f83a/raw/9699816ee7b9336e383d24082c40456bceaf6ff9/hel4.geojson').then((response) =>
+    {
+      //alert(response);
+
+      //const omadata=res.data.data.children.map(obj => obj.data);
+      /*this.setState(() =>
+      {
+        //alert(response);
+
+        return {
+          omadata: response.data
+        }
+      })*/
+      //https://alligator.io/react/axios-react
+      {
+        const omadata=response.data;
+        this.setState({omadata});
+        //this.setState({omadata:response});
+      }
+    })
+  }
+
+  componentDidMount()
+  {
+      alert("cmd2");
+
+      fetch('https://gist.githubusercontent.com/NL-0/b6f17f8f86598eab84087db42c78f83a/raw/9699816ee7b9336e383d24082c40456bceaf6ff9/hel4.geojson')
+        .then(response => response.json())
+        .then(omadata => this.setState({omadata}));
+  }
+
+  render()
+  {
+    const position = [this.state.lat, this.state.lng];
+
+    return (
+      <LeafletMap
+      center={[50, 10]}
+      zoom={6}
+      maxZoom={10}
+      attributionControl={true}
+      zoomControl={true}
+      doubleClickZoom={true}
+      scrollWheelZoom={true}
+      dragging={true}
+      //animate=import GeoJson from 'react';{true}
+      easeLinearity={0.35}
+    >
+      <TileLayer
+        url='http://{s}.tile.osm.org/{z}/{x}/{y}.png'
+      />
+      <Marker position={[50, 10]}>
+        <Popup>
+          Popup for any custom information.
+        </Popup>
+      </Marker>
+
+      {/*<GeoJSON data={getGeoJson()} style={this.getStyle} onEachFeature={this.onEachFeature}/>*/}
+      <GeoJSON data={this.state.omadata} style={this.getStyle} onEachFeature={this.onEachFeature}/>
+
+    </LeafletMap>
+  );   
+  }
+
+  onEachFeature = (feature, layer) =>
+  {
+    layer.on('click', function(e)
+    {
+      var omalayer=e.target;
+      //alert('Clicked: ' + omalayer.feature.properties.name);
+      omalayer.bindPopup(omalayer.feature.properties.NIMI + " "
+        + omalayer.feature.properties.URL);
+    });
+  }
+
+  getStyle(feature, layer) {
+    return {
+      color: '#006400',
+      weight: 5,
+      opacity: 0.65
+    }
+  }
+}
+
+export default Map

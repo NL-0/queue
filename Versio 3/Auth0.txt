@@ -1,0 +1,2 @@
+Domain:		dev-58pqzz03.eu.auth0.com
+ClientID:	OJ5qZ7IZLc2sTRSVRpc_5tl7MYvyulW9
