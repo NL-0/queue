@@ -6,6 +6,7 @@ const MakeBar = props => {
     const { progress } = props;
     console.log(`${progress}`)
 
+    //Progress bar valittaa muuten turhaan jos alle 0 tai yli 100
     if ( `${progress}` > 100 ) {
         return <div></div>
     }
@@ -15,8 +16,6 @@ const MakeBar = props => {
     else {
         return <div></div>
     }
-
-
 }
 
 export default MakeBar

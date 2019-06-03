@@ -11,11 +11,12 @@ import { library } from '@fortawesome/fontawesome-svg-core';
 import "react-step-progress-bar/styles.css";
 import MakeBar from './MakeBar';
 
-
 library.add(faPlusSquare, faMinusSquare)
 class Home extends Component {
   constructor(props) {
     super(props)
+   
+   // console.log("about2:", props.location)
     this.state = {
       //kuinka usein timer tick
       timer1: '1000',
@@ -52,7 +53,6 @@ class Home extends Component {
 
   }
 
-
   login() {
     this.props.auth.login();
   }
@@ -75,7 +75,21 @@ class Home extends Component {
 
   componentDidMount() {
     //Valitse url jonka jonon näyttää
-    if (this.state.jokuValue === '1') {
+
+    // if (!Object.values(this.props.location.aboutProps)){
+    //   console.log("values")
+    // }
+    // else {
+    //   console.log("nope")
+    // }
+
+    // console.log(this.state.test1)
+    // console.log(`${this.props.location.aboutProps}`)
+    // console.log(Object.values(this.props.location.aboutProps))
+    const mehmeh = localStorage.getItem('jokuvalue');
+    this.setState({ mehmeh, });
+
+    if (this.state.jokuValue === '1' ) {
       this.setState({
         url: this.state.url1,
       })
@@ -85,7 +99,8 @@ class Home extends Component {
         url: this.state.url2,
       })
     }
-
+    console.log(`${mehmeh}`)
+    
     //ei toimi
     //this.timerID = setInterval(() => this.tick(), this.state.timer1)  
     //toimii
@@ -146,6 +161,7 @@ class Home extends Component {
       timer10: this.state.jono,
       timer11: Date.now(),
       timer21: this.keskiarvo(),
+
     })
   };
 

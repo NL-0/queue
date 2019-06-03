@@ -17,6 +17,7 @@
         "react": "^16.8.6",
         "react-bootstrap": "^0.31.2",
         "react-dom": "^16.8.6",
+        "react-leaflet": "^2.3.0",
         "react-router": "^5.0.0",
         "react-router-dom": "^5.0.0",
         "react-step-progress-bar": "^1.0.3",

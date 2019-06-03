@@ -89,7 +89,7 @@ export default class Auth {
     });
 
     // navigate to the home route
-    history.replace('/home');
+    history.replace('/kartta');
   }
 
   isAuthenticated() {

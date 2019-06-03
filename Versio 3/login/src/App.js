@@ -37,66 +37,60 @@ class App extends Component {
     }
 
     return (
-        <div className="outer">
-          {/* <AppBar position="static" color="default">
+      <div className="outer">
+        {/* <AppBar position="static" color="default">
             <Toolbar> */}
         <Navbar fluid>
           <Navbar.Header>
             <Navbar.Brand>
-              
               {/* <a href="#1">Queue</a> */}
             </Navbar.Brand>
-              {  !isAuthenticated() &&
+            {!isAuthenticated() &&
               <React.Fragment>
-              <Button bsStyle="primary" className="btn-margin" onClick={this.goTo.bind(this, 'kartta')}
+                <Button bsStyle="primary" className="btn-margin" onClick={this.goTo.bind(this, 'kartta')}
                 >Kartta &nbsp;
                 <FontAwesomeIcon icon={faMapMarkedAlt} />
-              </Button>
+                </Button>
 
-              <Button bsStyle="primary" className="btn-margin" onClick={this.goTo.bind(this, 'home')}>
-                Jono &nbsp;
+                <Button bsStyle="primary" className="btn-margin" onClick={this.goTo.bind(this, 'home')}>
+                  Jono &nbsp;
                 <FontAwesomeIcon icon={faExchangeAlt} />
                 </Button>
-              
-              <Button bsStyle="success" className="btn-margin" onClick={this.login.bind(this)} style={{ left: '200%' }}>
-                Kirjaudu sisään &nbsp;
+
+                <Button bsStyle="success" className="btn-margin" onClick={this.login.bind(this)} style={{ left: '200%' }}>
+                  Kirjaudu sisään &nbsp;
                 <FontAwesomeIcon icon={faSignInAlt} />
-              </Button>
-             
-             
+                </Button>
               </React.Fragment>
+            }
 
-
-
-              }
-
-              {
-                isAuthenticated() && 
-                <React.Fragment>
-                  <Button bsStyle="primary" className="btn-margin" onClick={this.goTo.bind(this, 'kartta')}>
-                     Kartta &nbsp;
+            {
+              isAuthenticated() &&
+              <React.Fragment>
+                <Button bsStyle="primary" className="btn-margin" onClick={this.goTo.bind(this, 'kartta')}>
+                  Kartta &nbsp;
                     <FontAwesomeIcon icon={faMapMarkedAlt} />
-                    </Button>
-                  <Button bsStyle="primary" className="btn-margin" onClick={this.goTo.bind(this, 'home')}>
-                    Jono &nbsp;
+                </Button>
+                <Button bsStyle="primary" className="btn-margin" onClick={this.goTo.bind(this, 'home')}>
+                  Jono &nbsp;
                 <FontAwesomeIcon icon={faExchangeAlt} />
-                    </Button>
-                  <Button id="qsLogoutBtn" bsStyle="danger" className="btn-margin" onClick={this.logout.bind(this)} style={loginStyle}> 
+                </Button>
+                <Button id="qsLogoutBtn" bsStyle="danger" className="btn-margin" onClick={this.logout.bind(this)} style={loginStyle}>
                   Kirjaudu ulos &nbsp;
                   <FontAwesomeIcon icon={faSignOutAlt} />
-                  </Button>
-                </React.Fragment>
+                </Button>
+              </React.Fragment>
 
-              }
-          {/* </Toolbar>
+            }
+            {/* </Toolbar>
         </AppBar> */}
           </Navbar.Header>
         </Navbar>
-            </div>
-          )
-        }
-    }
-  
+      </div>
+    )
+  }
+}
+
 
 
 export default App;
