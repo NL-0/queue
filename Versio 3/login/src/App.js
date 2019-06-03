@@ -48,12 +48,12 @@ class App extends Component {
             </Navbar.Brand>
               {  !isAuthenticated() &&
               <React.Fragment>
-              <Button bsStyle="primary" className="btn-margin" onClick={this.goTo.bind(this, 'home')}
+              <Button bsStyle="primary" className="btn-margin" onClick={this.goTo.bind(this, 'kartta')}
                 >Kartta &nbsp;
                 <FontAwesomeIcon icon={faMapMarkedAlt} />
               </Button>
 
-              <Button bsStyle="primary" className="btn-margin" onClick={this.goTo.bind(this, 'jono2')}>
+              <Button bsStyle="primary" className="btn-margin" onClick={this.goTo.bind(this, 'home')}>
                 Jono &nbsp;
                 <FontAwesomeIcon icon={faExchangeAlt} />
                 </Button>
@@ -73,11 +73,11 @@ class App extends Component {
               {
                 isAuthenticated() && 
                 <React.Fragment>
-                  <Button bsStyle="primary" className="btn-margin" onClick={this.goTo.bind(this, 'home')}>
+                  <Button bsStyle="primary" className="btn-margin" onClick={this.goTo.bind(this, 'kartta')}>
                      Kartta &nbsp;
                     <FontAwesomeIcon icon={faMapMarkedAlt} />
                     </Button>
-                  <Button bsStyle="primary" className="btn-margin" onClick={this.goTo.bind(this, 'jono')}>
+                  <Button bsStyle="primary" className="btn-margin" onClick={this.goTo.bind(this, 'home')}>
                     Jono &nbsp;
                 <FontAwesomeIcon icon={faExchangeAlt} />
                     </Button>
