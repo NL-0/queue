@@ -31,5 +31,5 @@ echo $jono
 echo $seuraava
 
     #echo "Hi"
-    sleep 5
+    sleep 2
  done

@@ -19,6 +19,7 @@
         "react-dom": "^16.8.6",
         "react-router": "^5.0.0",
         "react-router-dom": "^5.0.0",
+        "react-step-progress-bar": "^1.0.3",
         "toasted-notes": "^2.1.5",
         "typeface-roboto": "0.0.54"
     },
