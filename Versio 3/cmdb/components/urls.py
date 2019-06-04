@@ -4,12 +4,6 @@ from components.api import *
 from components import models
 
 urlpatterns = [
-    url(r'^os/$', OperatingSystemListUI.as_view(),
-            name='os_list_ui'),
-    url(r'^api/os/$', os_list,
-            name='os_list'),
-    url(r'^api/os/id/(?P<pk>[0-9]+)$', os_detail,
-            name='os_detail'),
     url(r'^server/$', ServerListUI.as_view(),
             name='server_list_ui'),
     url(r'^api/server/$', server_list,

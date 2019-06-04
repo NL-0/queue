@@ -13,62 +13,6 @@ from rest_framework.parsers import JSONParser
 from components.serializers import *
 from components.models import *
 
-
-class OperatingSystemListUI(ListCreateAPIView):
-
-    """
-    Showing list of operating systems in UI 
-    """
-
-    queryset = OperatingSystem.objects.all()
-    serializer_class = OperatingSystemSerializer
-    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
-
-@csrf_exempt
-def os_list(request):
-    """
-    List all operating systems or add new system
-    """
-    if request.method == 'GET':
-        os = OperatingSystem.objects.all()
-        serializer = OperatingSystemSerializer(os, many=True)
-        return JsonResponse(serializer.data, safe=False)
-
-    elif request.method == 'POST':
-        data = JSONParser().parse(request)
-        serializer = OperatingSystemSerializer(data=data)
-        if serializer.is_valid():
-            serializer.save()
-            return JsonResponse(serializer.data, status=201)
-        return JsonResponse(serializer.errors, status=400)
-
-
-@csrf_exempt
-def os_detail(request, pk):
-    """
-    Retrieve, update or delete oparating systems.
-    """
-    try:
-        os = OperatingSystem.objects.get(pk=pk)
-    except OperatingSystem.DoesNotExist:
-        return HttpResponse(status=404)
-
-    if request.method == 'GET':
-        serializer = OperatingSystemSerializer(os)
-        return JsonResponse(serializer.data)
-
-    elif request.method == 'PUT':
-        data = JSONParser().parse(request)
-        serializer = OperatingSystemSerializer(os, data=data)
-        if serializer.is_valid():
-            serializer.save()
-            return JsonResponse(serializer.data)
-        return JsonResponse(serializer.errors, status=400)
-
-    elif request.method == 'DELETE':
-        os.delete()
-        return HttpResponse(status=204)
-
 class ServerListUI(ListCreateAPIView):
 
     """
@@ -120,9 +64,10 @@ def server_detail(request, pk):
             return JsonResponse(serializer.data)
         return JsonResponse(serializer.errors, status=400)
 
-    elif request.method == 'DELETE':
-        os.delete()
-        return HttpResponse(status=204)
+    # Ei tarvi delete
+    # elif request.method == 'DELETE':
+    #     os.delete()
+    #     return HttpResponse(status=204)
 
 @csrf_exempt
 def server_detail_by_name(request, name):
@@ -146,6 +91,7 @@ def server_detail_by_name(request, name):
             return JsonResponse(serializer.data)
         return JsonResponse(serializer.errors, status=400)
 
-    elif request.method == 'DELETE':
-        os.delete()
-        return HttpResponse(status=204)
+    # Ei tarvi delete
+    # elif request.method == 'DELETE':
+    #     os.delete()
+    #     return HttpResponse(status=204)
