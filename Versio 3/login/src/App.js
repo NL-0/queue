@@ -4,6 +4,7 @@ import './App.css';
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSignInAlt, faMapMarkedAlt, faExchangeAlt, faSignOutAlt } from '@fortawesome/free-solid-svg-icons';
+import Notifications from 'react-notify-toast';
 
 library.add(faMapMarkedAlt, faSignInAlt, faExchangeAlt, faSignOutAlt)
 
@@ -44,6 +45,7 @@ class App extends Component {
 
     return (
       <div className="outer">
+        <Notifications options={{zIndex: 200, top: '200px'}} />
         {/* <AppBar position="static" color="default">
             <Toolbar> */}
         <Navbar fluid>

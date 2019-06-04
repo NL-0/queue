@@ -91,27 +91,3 @@
     color: white;
  
 }
-
-.circle {
-    border-radius: 50%;
-    width: 40px;
-    height: 40px;
-    padding: 4px;
-    background: #fff;
-    border: 2px solid blue;
-    color: black;
-    text-align: center;
-    display: inline-block;
-    }
-
-.circle2 {
-    border-radius: 50%;
-    width: 40px;
-    height: 40px;
-    padding: 4px;
-    background: #fff;
-    border: 2px solid green;
-    color: black;
-    text-align: center;
-    display: inline-block;
-}

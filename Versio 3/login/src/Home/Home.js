@@ -2,13 +2,13 @@ import React, { Component } from 'react';
 import '../Components/jono.css';
 import Arvio from '../Components/Arvio'
 import axios from 'axios';
-import toaster from 'toasted-notes';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { Button } from 'react-bootstrap';
 import { faPlusSquare, faMinusSquare } from '@fortawesome/free-solid-svg-icons';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import "react-step-progress-bar/styles.css";
 import MakeBar from './MakeBar';
+import { notify } from 'react-notify-toast';
 
 library.add(faPlusSquare, faMinusSquare)
 class Home extends Component {
@@ -32,6 +32,7 @@ class Home extends Component {
       hostname: '',
       jono: '1',
       seuraava: '1',
+      id: '',
       tmp: '1',
       //lisää ja poista jonosta varattu numero
       tmp2: '1',
@@ -68,6 +69,7 @@ class Home extends Component {
           jono: jotain.jono,
           seuraava: jotain.seuraava,
           hostname: jotain.hostname,
+          id: jotain.id,
         })
       })
   }
@@ -76,32 +78,6 @@ class Home extends Component {
 
   componentDidMount() {
     //Valitse url jonka jonon näyttää
-
-    // if (!Object.values(this.props.location.aboutProps)){
-    //   console.log("values")
-    // }
-    // else {
-    //   console.log("nope")
-    // }
-
-    // console.log(this.state.test1)
-    // console.log(`${this.props.location.aboutProps}`)
-    // console.log(Object.values(this.props.location.aboutProps))
-    // const mehmeh = localStorage.getItem('jokuvalue');
-    // this.setState({ mehmeh });
-
-    // if (this.state.jokuValue === '1' ) {
-    //   this.setState({
-    //     url: this.state.url1,
-    //   })
-    // }
-    // else {
-    //   this.setState({
-    //     url: this.state.url2,
-    //   })
-    // }
-    // console.log(`${mehmeh}`)
-
     this.setState({
       url: sessionStorage.getItem('jokuvalue'),
     })
@@ -139,14 +115,8 @@ class Home extends Component {
 
     if (Number(this.state.oma) === Number(this.state.num2)) {
       console.log(this.state.num2)
-      //ei kovin hyvä kun spam kunnes numero vaihtuu
-      toaster.notify(
-        <h2>
-          Vuoronumero!
-          </h2>, {
-          duration: 2000
-        })
-      //alert("Vuoronumero")
+      let myColor = { background: '#FFC107', text: "#FFFFFF" };
+      notify.show("Vuoronumero", 'custom', 10000, myColor)
     }
 
     if (this.state.jono !== this.state.timer10) {
@@ -187,9 +157,10 @@ class Home extends Component {
 
   axiosTest2() {
     axios.put(`${this.state.url}`, {
-      id: '1',
-      hostname: 'jokuhosti',
+      id: `${this.state.id}`,
+      hostname: `${this.state.hostname}`,
       enabled: '1',
+      //  created: `${this.state.date}`,
       created: 'date',
       jono: `${this.state.tmp2}`,
       seuraava: `${this.state.tmp3}`
@@ -201,12 +172,13 @@ class Home extends Component {
 
   //Poista varattu numero, eli -1 jonoon kun ei parempaa tapaa nyt keksi
   axiosTest3() {
+    console.log(this.state.date)
     axios.put(`${this.state.url}`, {
-      id: '1',
-      hostname: 'jokuhosti',
+      id: `${this.state.id}`,
+      hostname: `${this.state.hostname}`,
       enabled: '1',
       created: 'date',
-      jono: `${this.state.tmp2}`,
+      jono: `${this.state.tmp4}`,
       seuraava: `${this.state.tmp3}`
     })
       .then(function (response) {
@@ -217,15 +189,10 @@ class Home extends Component {
 
 
   otanumero = () => {
-    //huono alert
     this.axiosTest2()
+    let myColor = { background: '#28A745', text: "#FFFFFF" };
+    notify.show("Numero varattu", 'custom', 3000, myColor)
 
-    toaster.notify(
-      <h2>
-        Numero varattu
-        </h2>, {
-        duration: 2000
-      })
     this.setState({
       oma: parseInt(this.state.num1) + parseInt(this.state.num2),
       hideperuuta: 'block',
@@ -235,6 +202,8 @@ class Home extends Component {
 
   peruutaNumero = () => {
     this.axiosTest3()
+    let myColor = { background: '#DC3545', text: "#FFFFFF" };
+    notify.show("Numero peruttu", 'custom', 3000, myColor)
     return this.setState({
       oma: '0',
       hideperuuta: 'none',

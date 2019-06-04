@@ -13,20 +13,11 @@ class Kartta extends Component {
         }
     }
 
-
-    // testiavaan = () => {
-    //     return console.log("meh23923")
-    // }
-
     testiavaan() {
-        console.log("212121")
+      //  console.log("212121")
         sessionStorage.setItem('jokuvalue', this.state.meh2)
       //  sessionStorage.setItem('value', false)
     }
-
-
-    
-
 
 //vai local storage?
     render() {
@@ -39,6 +30,7 @@ class Kartta extends Component {
 
                 
                     {/* Toimiva */}
+                    {/* Jonoon suoraan kun painaa nappia ja antaa arvon jossa jonon url */}
                     <Link to={'/home'} onClick={() => this.testiavaan()}>Testi nappi</Link>
 
                 </div>

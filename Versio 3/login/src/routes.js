@@ -5,8 +5,8 @@ import Home from './Home/Home';
 import Callback from './Callback/Callback';
 import Auth from './Auth/Auth';
 import history from './history';
-import Jono2 from './Components/Jono2';
-import Jono from './Components/Jono';
+// import Jono2 from './Components/Jono2';
+// import Jono from './Components/Jono';
 import Kartta from './Components/Kartta'
 
 const auth = new Auth();
@@ -24,8 +24,8 @@ export const makeMainRoutes = () => {
           <Route path="/" render={(props) => <App auth={auth} {...props} />} />
           <Route path="/kartta" render={(props) => <Kartta auth={auth} {...props} />} />          
           <Route path="/home" render={(props) => <Home auth={auth} {...props} />} />
-          <Route path="/jono2" render={(props) => <Jono2 auth={auth} {...props} />} />
-          <Route path="/jono" render={(props) => <Jono auth={auth} {...props} />} />
+          {/* <Route path="/jono2" render={(props) => <Jono2 auth={auth} {...props} />} />
+          <Route path="/jono" render={(props) => <Jono auth={auth} {...props} />} /> */}
           <Route path="/callback" render={(props) => {
             handleAuthentication(props);
             return <Callback {...props} /> 
