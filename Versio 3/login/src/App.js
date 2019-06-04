@@ -22,6 +22,10 @@ class App extends Component {
   }
 
   componentDidMount() {
+
+    const mehmeh = localStorage.getItem('jokuvalue');
+    this.setState({ mehmeh, });
+
     const { renewSession } = this.props.auth;
 
     if (localStorage.getItem('isLoggedIn') === 'true') {
@@ -29,12 +33,14 @@ class App extends Component {
     }
   }
 
+
   render() {
     const { isAuthenticated } = this.props.auth;
 
     let loginStyle = {
       left: '20%',
     }
+
 
     return (
       <div className="outer">
@@ -51,7 +57,7 @@ class App extends Component {
                 >Kartta &nbsp;
                 <FontAwesomeIcon icon={faMapMarkedAlt} />
                 </Button>
-
+  
                 <Button bsStyle="primary" className="btn-margin" onClick={this.goTo.bind(this, 'home')}>
                   Jono &nbsp;
                 <FontAwesomeIcon icon={faExchangeAlt} />

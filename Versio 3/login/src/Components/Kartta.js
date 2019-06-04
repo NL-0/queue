@@ -8,7 +8,8 @@ class Kartta extends Component {
        // const { jokuvalue } = this.state;
         this.state = {
             meh: '',
-            meh2: '20',
+          //  meh2: Math.floor(Math.random() * 10),
+            meh2: 'http://192.168.220.139:9595/components/api/server/id/1',
         }
     }
 
@@ -19,8 +20,10 @@ class Kartta extends Component {
 
     testiavaan() {
         console.log("212121")
-        localStorage.setItem('jokuvalue', this.state.meh2);
+        sessionStorage.setItem('jokuvalue', this.state.meh2)
+      //  sessionStorage.setItem('value', false)
     }
+
 
     
 
@@ -32,31 +35,14 @@ class Kartta extends Component {
 
             <div className="outer">
                 
-                <Link to ={{
-                    pathname: '/home',
-                    aboutProps: {
-                        value: 1,
-                        //name: 'meh meh meh'
-                    },
-                    onClick: `${this.testiavaan}`, 
-                }}>Meh</Link>
-                <div>
-
-                <Link to ={
-                    {
-                    pathname: '/home',
-                    aboutProps: {
-                        value: 2,
-                        //name: 'meh meh meh'
-                    }
-                }}>Meh</Link>
+                <div>Kartta Tähän</div>
 
                 
                     {/* Toimiva */}
-                    <Link to={'/home'} onClick={() => this.testiavaan()}>Here</Link>
+                    <Link to={'/home'} onClick={() => this.testiavaan()}>Testi nappi</Link>
 
                 </div>
-            </div>
+            
         )
     }
 }

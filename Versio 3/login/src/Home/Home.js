@@ -3,7 +3,6 @@ import '../Components/jono.css';
 import Arvio from '../Components/Arvio'
 import axios from 'axios';
 import toaster from 'toasted-notes';
-import 'toasted-notes/src/styles.css'; // optional styles
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { Button } from 'react-bootstrap';
 import { faPlusSquare, faMinusSquare } from '@fortawesome/free-solid-svg-icons';
@@ -15,8 +14,8 @@ library.add(faPlusSquare, faMinusSquare)
 class Home extends Component {
   constructor(props) {
     super(props)
-   
-   // console.log("about2:", props.location)
+
+    // console.log("about2:", props.location)
     this.state = {
       //kuinka usein timer tick
       timer1: '1000',
@@ -34,11 +33,13 @@ class Home extends Component {
       jono: '1',
       seuraava: '1',
       tmp: '1',
+      //lisää ja poista jonosta varattu numero
       tmp2: '1',
       tmp3: '1',
+      tmp4: '1',
       jokuValue: '1',
-      url: '',
       //jonojen database url, tarvitsee paremman tavan
+      url: '',
       url1: 'http://192.168.220.139:9595/components/api/server/id/1',
       url2: 'http://192.168.220.139:9595/components/api/server/id/2',
       //aikaarvio
@@ -86,21 +87,26 @@ class Home extends Component {
     // console.log(this.state.test1)
     // console.log(`${this.props.location.aboutProps}`)
     // console.log(Object.values(this.props.location.aboutProps))
-    const mehmeh = localStorage.getItem('jokuvalue');
-    this.setState({ mehmeh, });
+    // const mehmeh = localStorage.getItem('jokuvalue');
+    // this.setState({ mehmeh });
 
-    if (this.state.jokuValue === '1' ) {
-      this.setState({
-        url: this.state.url1,
-      })
-    }
-    else {
-      this.setState({
-        url: this.state.url2,
-      })
-    }
-    console.log(`${mehmeh}`)
-    
+    // if (this.state.jokuValue === '1' ) {
+    //   this.setState({
+    //     url: this.state.url1,
+    //   })
+    // }
+    // else {
+    //   this.setState({
+    //     url: this.state.url2,
+    //   })
+    // }
+    // console.log(`${mehmeh}`)
+
+    this.setState({
+      url: sessionStorage.getItem('jokuvalue'),
+    })
+
+
     //ei toimi
     //this.timerID = setInterval(() => this.tick(), this.state.timer1)  
     //toimii
@@ -126,12 +132,14 @@ class Home extends Component {
     else {
       this.setState({
         arvioAika: (Number(this.state.oma) - Number(this.state.num2)) * this.state.timer21,
+        //matematiikka on vaikeeta 
         bar: (this.state.seuraava - this.state.oma) / this.state.seuraava * 100 + 100
       })
     }
 
     if (Number(this.state.oma) === Number(this.state.num2)) {
       console.log(this.state.num2)
+      //ei kovin hyvä kun spam kunnes numero vaihtuu
       toaster.notify(
         <h2>
           Vuoronumero!
@@ -158,6 +166,7 @@ class Home extends Component {
       num2: this.state.seuraava,
       tmp2: Number(this.state.jono) + 1,
       tmp3: Number(this.state.seuraava),
+      tmp4: Number(this.state.jono) - 1,
       timer10: this.state.jono,
       timer11: Date.now(),
       timer21: this.keskiarvo(),
@@ -186,14 +195,31 @@ class Home extends Component {
       seuraava: `${this.state.tmp3}`
     })
       .then(function (response) {
-        console.log('saved successfully')
+        console.log('Numero varattu')
       });
   }
+
+  //Poista varattu numero, eli -1 jonoon kun ei parempaa tapaa nyt keksi
+  axiosTest3() {
+    axios.put(`${this.state.url}`, {
+      id: '1',
+      hostname: 'jokuhosti',
+      enabled: '1',
+      created: 'date',
+      jono: `${this.state.tmp2}`,
+      seuraava: `${this.state.tmp3}`
+    })
+      .then(function (response) {
+        console.log('Numero poistettu onnistuneesti')
+      });
+  }
+
 
 
   otanumero = () => {
     //huono alert
     this.axiosTest2()
+
     toaster.notify(
       <h2>
         Numero varattu
@@ -208,7 +234,7 @@ class Home extends Component {
   }
 
   peruutaNumero = () => {
-
+    this.axiosTest3()
     return this.setState({
       oma: '0',
       hideperuuta: 'none',
@@ -228,77 +254,91 @@ class Home extends Component {
     let peruutaStyle = {
       display: this.state.hideperuuta,
     }
+    if (sessionStorage.getItem('jokuvalue')) {
+      return (
+        <div className="container">
 
-    return (
-      <div className="container">
-
-        <div className="outer">
-          <br />
-          <div className="container"><h5>{this.state.hostname}</h5>
+          <div className="outer">
             <br />
-            <div className="row" align="center">
-              <div className="col-6">
-                <Button type="button" className="btn btn-primary">
-                  Jonon pituus: <span className="badge badge-light">{this.state.num1}</span>
-                </Button>
+            <div className="container"><h5>{this.state.hostname}</h5>
+              <br />
+              <div className="row" align="center">
+                <div className="col-6">
+                  <Button type="button" className="btn btn-primary">
+                    Jonon pituus: <span className="badge badge-light">{this.state.num1}</span>
+                  </Button>
+                </div>
+                <div className="col-6">
+                  <Button type="button" className="btn btn-warning">
+                    Seuraava: <span className="badge badge-light">{this.state.num2}</span>
+                  </Button>
+                </div>
               </div>
-              <div className="col-6">
-                <Button type="button" className="btn btn-warning">
-                  Seuraava: <span className="badge badge-light">{this.state.num2}</span>
-                </Button>
+              <div className="row">
+                <div className="col-6"></div>
+                <div className="col-9"><div className='arvio'>{this.aikaArvio()}</div>
+                </div>
+                <div className="col-6 col-md-4"></div>
               </div>
             </div>
-            <div className="row">
-              <div className="col-6"></div>
-              <div className="col-9"><div className='arvio'>{this.aikaArvio()}</div>
-              </div>
-              <div className="col-6 col-md-4"></div>
-            </div>
-          </div>
 
 
-          {/* Näytä loput vain jos auth */}
-          {isAuthenticated() &&
-            <React.Fragment>
-              <MakeBar progress={this.state.bar} />
-      <br />
-      
-              <div align="center">
-                <Button type="button" className="btn btn-info">
-                  Oma numero: <span className="badge badge-light">{this.state.oma}
-                  </span>
-                </Button>
-              </div>
-              <br />
-              <br />
-              <div align="center">
-                <Button type="button" className="btn btn-success" onClick={this.otanumero}>
-                  Ota Numero &nbsp; <span className="badge badge-primary">
-                  </span>
-                  <FontAwesomeIcon icon={faPlusSquare} />
-                </Button>
-              </div>
-              <br />
-              <div align="center">
-                <Button type="button" className="btn btn-danger" style={peruutaStyle} onClick={this.peruutaNumero}>
-                  Peruuta numero &nbsp;
+
+            {/* Näytä loput vain jos auth */}
+            {isAuthenticated() &&
+              <React.Fragment>
+                <MakeBar progress={this.state.bar} />
+                <br />
+
+                <div align="center">
+                  <Button type="button" className="btn btn-info">
+                    Oma numero: <span className="badge badge-light">{this.state.oma}
+                    </span>
+                  </Button>
+                </div>
+                <br />
+                <br />
+                <div align="center">
+                  <Button type="button" className="btn btn-success" onClick={this.otanumero}>
+                    Ota Numero &nbsp; <span className="badge badge-primary">
+                    </span>
+                    <FontAwesomeIcon icon={faPlusSquare} />
+                  </Button>
+                </div>
+                <br />
+                <div align="center">
+                  <Button type="button" className="btn btn-danger" style={peruutaStyle} onClick={this.peruutaNumero}>
+                    Peruuta numero &nbsp;
                   <FontAwesomeIcon icon={faMinusSquare} />
-                </Button>
-              </div>
-              <br />
-            </React.Fragment>
-          }
-          {
-            !isAuthenticated() && (
-              <div></div>
-              /* turha */
-            )
-          }
+                  </Button>
+                </div>
+                <br />
+              </React.Fragment>
+            }
+            {
+              !isAuthenticated() && (
+                <div></div>
+                /* turha */
+              )
+            }
+          </div>
         </div>
-      </div>
 
-    );
+      )
+    }
+    else {
+      return (
+        <div className="container">
+
+          <div className="outer">
+            <div>Jonoa ei valittu</div>
+          </div>
+        </div>
+
+      )
+    }
   }
+
 }
 
 export default Home;
