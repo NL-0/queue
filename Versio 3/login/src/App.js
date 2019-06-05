@@ -24,13 +24,26 @@ class App extends Component {
 
   componentDidMount() {
 
-    const mehmeh = localStorage.getItem('jokuvalue');
-    this.setState({ mehmeh, });
-
     const { renewSession } = this.props.auth;
 
     if (localStorage.getItem('isLoggedIn') === 'true') {
       renewSession();
+    }
+  }
+
+  kartta() {
+   if (!sessionStorage.getItem('omanumero')) {
+      return (
+      <Button bsStyle="primary" className="btn-margin" onClick={this.goTo.bind(this, 'kartta')}>
+      Kartta &nbsp;
+        <FontAwesomeIcon icon={faMapMarkedAlt} />
+      </Button>
+      )
+    }
+    else {
+      return <Button bsStyle="primary" className="btn-primary disabled">Kartta &nbsp;
+      <FontAwesomeIcon icon={faMapMarkedAlt} />
+      </Button>
     }
   }
 
@@ -75,10 +88,8 @@ class App extends Component {
             {
               isAuthenticated() &&
               <React.Fragment>
-                <Button bsStyle="primary" className="btn-margin" onClick={this.goTo.bind(this, 'kartta')}>
-                  Kartta &nbsp;
-                    <FontAwesomeIcon icon={faMapMarkedAlt} />
-                </Button>
+                {this.kartta()}  
+
                 <Button bsStyle="primary" className="btn-margin" onClick={this.goTo.bind(this, 'home')}>
                   Jono &nbsp;
                 <FontAwesomeIcon icon={faExchangeAlt} />

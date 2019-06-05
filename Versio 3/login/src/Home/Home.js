@@ -172,7 +172,7 @@ class Home extends Component {
 
   //Poista varattu numero, eli -1 jonoon kun ei parempaa tapaa nyt keksi
   axiosTest3() {
-    console.log(this.state.date)
+    //console.log(this.state.date)
     axios.put(`${this.state.url}`, {
       id: `${this.state.id}`,
       hostname: `${this.state.hostname}`,
@@ -192,22 +192,27 @@ class Home extends Component {
     this.axiosTest2()
     let myColor = { background: '#28A745', text: "#FFFFFF" };
     notify.show("Numero varattu", 'custom', 3000, myColor)
-
     this.setState({
       oma: parseInt(this.state.num1) + parseInt(this.state.num2),
       hideperuuta: 'block',
     }
     )
+
+    sessionStorage.setItem('omanumero', '1')
   }
 
   peruutaNumero = () => {
     this.axiosTest3()
     let myColor = { background: '#DC3545', text: "#FFFFFF" };
     notify.show("Numero peruttu", 'custom', 3000, myColor)
+    sessionStorage.removeItem('omanumero')
     return this.setState({
       oma: '0',
       hideperuuta: 'none',
     })
+
+
+
   }
 
   //Arvion sekunnin järkevään muotoon
