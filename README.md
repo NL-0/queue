@@ -1,7 +1,7 @@
 # queue
 
-Versio 1: Ensimmäinen ohjelma
+~~Versio 1: Ensimmäinen ohjelma~~
 
-Versio 2: React versio
+~~Versio 2: React versio~~
 
-Versio 3: React + django + login
+Versio 3: React + django + login (melkein toimiva)
