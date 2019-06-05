@@ -82,6 +82,7 @@ REST_FRAMEWORK = {
     'TEST_REQUEST_DEFAULT_FORMAT': 'json'
 }
 
+#default salasanat on hienoja ja turha piilottaa
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
