@@ -3,6 +3,7 @@ import './jono.css'
 import { Link } from 'react-router-dom'
 import { Map as LeafletMap, Marker, Popup, TileLayer } from 'react-leaflet';
 import { GeoJSON } from 'react-leaflet';
+import { Button } from 'react-bootstrap';
 
 class Kartta extends Component {
     constructor(props) {
@@ -11,12 +12,14 @@ class Kartta extends Component {
             meh: '',
             meh2: 'http://192.168.220.139:9595/components/api/server/id/1',
             omadata: [],
+            meh10: sessionStorage.getItem('meh123'),
+            meh11: '100',
         }
     }
 
     componentDidMount()
     {
-      fetch('https://gist.githubusercontent.com/NL-0/b6f17f8f86598eab84087db42c78f83a/raw/9699816ee7b9336e383d24082c40456bceaf6ff9/hel4.geojson')
+      fetch('https://gist.githubusercontent.com/NL-0/97baf721acedee23a924807bf2735057/raw/ec7b491726c7adbe659c30219bd3d6a9886f71ec/hel5.geojson')
         .then(response => response.json())
         .then((jsonData) => {
   
@@ -34,19 +37,29 @@ class Kartta extends Component {
 
     testiavaan() {
       //  console.log("212121")
-        sessionStorage.setItem('jokuvalue', this.state.meh2)
+      //  sessionStorage.setItem('jokuvalue', this.state.meh2)
+    //   this.setState({
+    //       test10: sessionStorage(),
+    //       test11: '',
+    //   })
+      sessionStorage.setItem('jokuvalue', sessionStorage.getItem('meh123'))
       //  sessionStorage.setItem('value', false)
     }
 
 
     onEachFeature = (feature, layer) => {
         layer.on('click', function (e) {
-          const osoite = "http://localhost/seuraavasivu.html";    //lataa hakemistosta /var/www/html
-    
+          //const osoite = "http://localhost/seuraavasivu.html";    //lataa hakemistosta /var/www/html
           var omalayer = e.target;
-          omalayer.bindPopup(omalayer.feature.properties.NIMI + "<br>"
-            + "<a href='" + osoite + "?val=" + omalayer.feature.properties.FID + "'>Siirry</a>");
-        });
+          //sessionStorage.setItem('meh123', 'http://192.168.220.139:9595/components/api/server/id/1')  
+          sessionStorage.setItem('meh123', omalayer.feature.properties.linkki)
+          omalayer.bindPopup(
+             omalayer.feature.properties.NIMI
+              );
+
+        //   omalayer.bindPopup(omalayer.feature.properties.NIMI + "<br>"
+        //   + "<a href='" + osoite + "?val=" + omalayer.feature.properties.FID + "'>Siirry</a>" + "<br>" + '<Link>123</Link>');
+      });
       }
 
       getStyle(feature, layer) {
@@ -57,6 +70,8 @@ class Kartta extends Component {
         }
       }
 
+     // <Link to={'/home'} onClick={() => this.testiavaan()}>Testi nappi</Link>
+
 
 //vai local storage?
     render() {
@@ -64,19 +79,19 @@ class Kartta extends Component {
         return (
 
             <div className="outer">
-                
-                <div>Kartta Tähän</div>
+                <div><h4>Valitse kartasta ja siirry jonoon</h4></div><br />
+                <div></div>
 
                 <LeafletMap
-          center={[60, 20]}
+                    center={[60, 20]}
           zoom={6}
           maxZoom={10}
-          attributionControl={true}
+          //attributionControl={true}
           zoomControl={true}
           doubleClickZoom={false}
           scrollWheelZoom={true}
           dragging={true}
-          easeLinearity={0.35}
+          //easeLinearity={0.35}
         >
           <TileLayer
             url='http://{s}.tile.osm.org/{z}/{x}/{y}.png'
@@ -92,18 +107,11 @@ class Kartta extends Component {
           
             </LeafletMap>    
 
-
-
-
-
-
-
-
-
                     {/* Toimiva */}
                     {/* Jonoon suoraan kun painaa nappia ja antaa arvon jossa jonon url */}
-                    <Link to={'/home'} onClick={() => this.testiavaan()}>Testi nappi</Link>
-
+                    <Link to={'/home'} onClick={() => this.testiavaan()}><Button bsStyle="primary" className="btn-margin" >
+                        Siirry jonoon
+                    </Button></Link>
                 </div>
             
         )
