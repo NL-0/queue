@@ -39,7 +39,7 @@ class Home extends Component {
       tmp3: '1',
       tmp4: '1',
       jokuValue: '1',
-      //jonojen database url, tarvitsee paremman tavan
+      //jonojen database url--  tarvitsee paremman tavan
       url: '',
       url1: 'http://192.168.220.139:9595/components/api/server/id/1',
       url2: 'http://192.168.220.139:9595/components/api/server/id/2',
@@ -144,7 +144,7 @@ class Home extends Component {
     })
   };
 
-  //keskiarvio ikuisesti kasvavasta arraysta
+  //keskiarvio ikuisesti kasvavasta listassa
 
   keskiarvo() {
     let sum = this.state.timer20.reduce((previous, current) => current += previous);
@@ -197,8 +197,7 @@ class Home extends Component {
       hideperuuta: 'block',
     }
     )
-
-    sessionStorage.setItem('omanumero', '1')
+    sessionStorage.setItem('omanumero', `${this.state.oma}`)
   }
 
   peruutaNumero = () => {
