@@ -90,7 +90,7 @@ class Kartta extends Component {
           let palvelu = sessionStorage.getItem('nimi')
           return (
           <div>
-            <Button bsStyle="info" onClick={this.turha}className="btn-margin" >
+            <Button bsStyle="info" onClick={this.turha}className="btn-margin">
             Valitse palvelu &nbsp;
         <FontAwesomeIcon icon={faMapMarkerAlt} />
         </Button>
@@ -137,7 +137,7 @@ class Kartta extends Component {
           
             </LeafletMap>    
 
-<br />
+
   
             
                     {/* Toimiva */}

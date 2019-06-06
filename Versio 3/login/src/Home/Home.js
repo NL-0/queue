@@ -51,6 +51,7 @@ class Home extends Component {
       timer20: [5],
       timer21: '',
       bar: '0',
+      nimi: sessionStorage.getItem('nimi')
     };
 
   }
@@ -112,7 +113,7 @@ class Home extends Component {
         bar: (this.state.seuraava - this.state.oma) / this.state.seuraava * 100 + 100
       })
     }
-
+    //notify näkyy uudelleen kunnes seuraava numero on vaihtunut
     if (Number(this.state.oma) === Number(this.state.num2)) {
       console.log(this.state.num2)
       let myColor = { background: '#FFC107', text: "#FFFFFF" };
@@ -124,7 +125,7 @@ class Home extends Component {
         timer12: Date.now(),
         timer13: Math.floor(((this.state.timer11 - this.state.timer12) / 1000) % 60),
       })
-
+      //Timer13 ei aina kovin tarkka ja joskus antaa 0 arvoja
       this.setState(prevState => ({
         timer20: [...prevState.timer20, this.state.timer13]
       }))
@@ -154,7 +155,7 @@ class Home extends Component {
 
 
   //lisää jonoon +1 kun ottaa numeron
-
+  //Pitäisi tallentaa oma varattu numero database ja verrata ettei samaa ole jo valittu tai saada seuraava vapaa numero jostain muualta eikä itse laskea sitä
   axiosTest2() {
     axios.put(`${this.state.url}`, {
       id: `${this.state.id}`,
@@ -230,10 +231,10 @@ class Home extends Component {
     if (sessionStorage.getItem('jokuvalue')) {
       return (
         <div className="container">
-
           <div className="outer">
             <br />
-            <div className="container"><h5>{this.state.hostname}</h5>
+          {/*   <div className="container"><h5>{this.state.hostname}</h5> */}
+            <div className="container"><h5>{this.state.nimi}</h5>
               <br />
               <div className="row" align="center">
                 <div className="col-6">

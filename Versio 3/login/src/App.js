@@ -30,7 +30,7 @@ class App extends Component {
       renewSession();
     }
   }
-
+//kartta disabled jos ei omaa numeroa muta ei toimi ellei paina jono napissa uudelleen koska sessionstorage..
   kartta() {
    if (!sessionStorage.getItem('omanumero')) {
       return (
@@ -54,7 +54,6 @@ class App extends Component {
     let loginStyle = {
       left: '20%',
     }
-
 
     return (
       <div className="outer">
