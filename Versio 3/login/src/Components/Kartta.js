@@ -4,12 +4,12 @@ import { Link } from 'react-router-dom'
 import { Map as LeafletMap, TileLayer } from 'react-leaflet';
 import { GeoJSON } from 'react-leaflet';
 import { Button } from 'react-bootstrap';
-import { faExchangeAlt } from '@fortawesome/free-solid-svg-icons';
+import { faExchangeAlt, faMapMarkerAlt } from '@fortawesome/free-solid-svg-icons';
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 
-library.add(faExchangeAlt)
+library.add(faExchangeAlt, faMapMarkerAlt)
 
 class Kartta extends Component {
     constructor(props) {
@@ -40,22 +40,22 @@ class Kartta extends Component {
         })
     }
 
+    //turhaan 2x sessionstorage samasta asiasta
     testiavaan() {
       sessionStorage.setItem('jokuvalue', sessionStorage.getItem('meh123'))
       //  sessionStorage.setItem('value', false)
     }
 
 
-
     onEachFeature = (feature, layer) => {
         layer.on('click', function (e) {
           var omalayer = e.target;
-
-    
-          sessionStorage.setItem('meh123', omalayer.feature.properties.linkki)
+          sessionStorage.setItem('nimi', omalayer.feature.properties.NIMI)
+          sessionStorage.setItem('meh123', 
+          omalayer.feature.properties.linkki)
           omalayer.bindPopup(
-             omalayer.feature.properties.NIMI
-              );
+          omalayer.feature.properties.NIMI + "<br>"
+                           );
 
         //   omalayer.bindPopup(omalayer.feature.properties.NIMI + "<br>"
         //   + "<a href='" + osoite + "?val=" + omalayer.feature.properties.FID + "'>Siirry</a>" + "<br>" + '<Link>123</Link>');
@@ -79,8 +79,40 @@ class Kartta extends Component {
             }
 
       }
-    render() {
 
+      turha = () => {
+        this.setState({
+          jonoteksti: 'Siirry jonoon'
+        })
+      }
+
+      valinta() {
+          let palvelu = sessionStorage.getItem('nimi')
+          return (
+          <div>
+            <Button bsStyle="info" onClick={this.turha}className="btn-margin" >
+            Valitse palvelu &nbsp;
+        <FontAwesomeIcon icon={faMapMarkerAlt} />
+        </Button>
+        
+            <div>
+              Valittu palvelu: {palvelu}
+            </div>
+{/* 
+          <div className="card" style={{width: '18rem'}}>
+            <div className="card-header">
+              Valittu palvelu
+            </div>
+            <div className="card-body">
+              <p className="card-text">{palvelu}</p>
+            </div>
+           </div>
+          </div> */}
+          </div>
+          )
+      }
+
+    render() {
         return (
 
             <div className="outer">
@@ -106,14 +138,12 @@ class Kartta extends Component {
             </LeafletMap>    
 
 <br />
-    
-
-
-
-
+  
             
                     {/* Toimiva */}
                     {/* Jonoon suoraan kun painaa nappia ja antaa arvon jossa jonon url */}
+                {this.valinta()}
+
                 {this.linkki()}
 
                 
