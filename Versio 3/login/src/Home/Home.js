@@ -198,6 +198,8 @@ class Home extends Component {
       hideperuuta: 'block',
     }
     )
+    //miksi antaa ensimmäinen click arvoksi 0?
+    //toinen click oikea arvo
     sessionStorage.setItem('omanumero', `${this.state.oma}`)
   }
 

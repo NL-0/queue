@@ -41,7 +41,8 @@ class App extends Component {
       )
     }
     else {
-      return <Button bsStyle="primary" className="btn-primary disabled">Kartta &nbsp;
+      return <Button bsStyle="primary" className="btn-primary disabled">
+        Kartta &nbsp;
       <FontAwesomeIcon icon={faMapMarkedAlt} />
       </Button>
     }
