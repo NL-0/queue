@@ -25,7 +25,7 @@ class App extends Component {
   componentDidMount() {
 
     const { renewSession } = this.props.auth;
-
+    this.timerID = setInterval(() => this.tick(), 2000 );
     if (localStorage.getItem('isLoggedIn') === 'true') {
       renewSession();
     }
@@ -35,7 +35,7 @@ class App extends Component {
    if (!sessionStorage.getItem('omanumero')) {
       return (
       <Button bsStyle="primary" className="btn-margin" onClick={this.goTo.bind(this, 'kartta')}>
-      Kartta &nbsp;
+        Kartta &nbsp;
         <FontAwesomeIcon icon={faMapMarkedAlt} />
       </Button>
       )
@@ -47,6 +47,19 @@ class App extends Component {
     }
   }
 
+  componentWillUnmount() {
+    clearInterval(this.timerID);
+  }
+
+
+  //timer antamaan turha setState että kartta() oleva sessionStorage toimisi
+  //pitää löytää parempi keino kun timeri
+  tick = () => {
+    this.setState({
+      turhatimeri: 'turhatimeri',
+    })
+    
+  }
 
   render() {
     const { isAuthenticated } = this.props.auth;
