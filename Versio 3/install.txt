@@ -1,0 +1,51 @@
+
+#pip
+sudo apt install python-pip
+
+#aktivoi/tee env
+source env/bin/activate
+
+##django
+pip install django
+pip install djangorestframework
+pip install markdown
+pip install django-filter
+pip install django-cors-headers
+
+#django mysql
+apt-get install libmysqlclient-dev
+pip install django-mysql
+pip install mysqlclient
+
+#vaihda django mysql salasana
+
+# apply migrations
+python manage.py makemigrations
+python manage.py migrate
+
+
+#./djangoservu.sh
+
+django url:
+http://localhost:9595/components/api/server/
+
+#curl put.sh scriptalle
+sudo apt install curl
+
+#./put.sh
+
+##react
+
+#sudo apt install npm
+
+#./login/npm i
+
+#?! jos error
+Error: Cannot find module '@csstools/normalize.css'
+#sudo npm install -g npm@latest
+#
+rm -rf node_modules
+npm cache clean
+npm install
+#
+

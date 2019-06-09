@@ -25,7 +25,7 @@ class Kartta extends Component {
 
     componentDidMount()
     {
-      fetch('https://gist.githubusercontent.com/NL-0/97baf721acedee23a924807bf2735057/raw/ec7b491726c7adbe659c30219bd3d6a9886f71ec/hel5.geojson')
+      fetch('https://gist.githubusercontent.com/NL-0/7f7798cf952ca93ec89a8801d6d40071/raw/d5227bfbeff211f2191238b2c7e31aa577bb74ab/hel6.geojson')
         .then(response => response.json())
         .then((jsonData) => {
   
